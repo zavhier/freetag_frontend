@@ -22,9 +22,11 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+              
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
@@ -119,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "frontgapharma"
+    }
+  },
+  "defaultProject": "frontgapharma",
+  "cli": {
+    "analytics": "90d30084-9ae1-4078-8189-7980f57f093e"
+  }
 }

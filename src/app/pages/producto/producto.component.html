@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Formulario para crear productos</h4>
+                <h6 class="card-subtitle">Completa <code>todos los datos</code> y valida tu código qr</h6>
+                <form [formGroup]="productoForm" (ngSubmit)="submitForm()" novalidate>  
+                    <div class="form-group">
+                        <label>Nombre  del producto <span class="help">e.j  "Guitarra Criolla"</span></label>
+                        <input type="text" class="form-control form-control-line" value="Nombre"  placeholder="Nombre" formControlName="nombre"> </div>
+                    <div class="form-group">
+                        <label for="example-email">Descripción <span class="help"> e.j "Tiene un calcomania"</span></label>
+                        <input type="email" id="example-email2" name="example-email" class="form-control" placeholder="Decripción" formControlName="descripcion"> 
+                    </div>
+                    <div class="form-group">
+                         <input type="Date"  value="fecha" [(ngModel)]="fecha"   id="example-email2" name="fecha" class="form-control"> 
+                    </div>
+                    <div class="form-group">
+                        <label for="example-email">Código Qr <span class="help"> e.j "AZJ132"</span></label>
+                        <input type="email" id="codigoQr" name="example-email" class="form-control" placeholder="Código Qr" formControlName="codigo"> 
+                    </div>
+                    <div class="form-group text-center m-t-20">
+                        <div class="col-xs-12">
+                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Guardar</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>    
+    </div>
+
+</div>
+

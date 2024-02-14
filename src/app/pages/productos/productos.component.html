@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Descripción</th>
+                                <th>Fecha</th>
+                                <th>Estado</th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                             <tr  *ngFor="let item of productos">
+                                <td><img src="../../../assets/images/logo-icon.png"  style="width: 10%;"/> </td>
+                                <td>{{item.id}}</td>
+                                <td>{{item.nombre}}</td>
+                                <td>{{item.descripcion}}</td>
+                                <td>{{item.fecha_creacion }}</td>
+                                <td *ngIf="item.tipo_estado_id == 1"><span class="label label-danger"  >Extraviado</span></td>
+                                <td *ngIf="item.tipo_estado_id == 2"><span class="label label-success">Activo</span></td>
+                                <td *ngIf="item.tipo_estado_id == 3"><span class="label label-info">Inactivo</span></td>
+                                <td>
+                                    <button  class="btn btn-outline-principal fom-control btn-grid "  data-toggle="modal" data-target="#add-contact" style="background: transparent" color="red"><i class="fa fa-trash"></i></button>
+                                    <button  class="btn btn-outline-principal fom-control btn-grid " (click)="onClickProducto(item)"  data-toggle="modal" data-target="#add-contact" style="background: transparent">
+                                        <i class="fa fa-binoculars" aria-hidden="true"></i></button>
+                                 </td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>  
+</div> 
+
+
+
+<div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Cambiar Estado</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <select [(ngModel)]="_estado" name="_estado" class="form-control float-right col-md-12">
+                    <option [value]="0">Seleccione el estado</option>
+                    <option [value]="1">Extraviado</option>
+                    <option [value]="3">Inactivo</option>
+                </select>               
+    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-info waves-effect" data-dismiss="modal" (click)="onCambiarEstado()">Guardar</button>
+                <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
