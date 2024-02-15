@@ -17,7 +17,7 @@ export class ProductoComponent implements OnInit {
  idUsuario:any
  access_token:any;
  fecha:Date;
- constructor(public formBuilder:FormBuilder, private productoService:ProductoService,private nvrlt:ToastrService, private router:Router)  { }
+ constructor(public formBuilder:FormBuilder, private productoService:ProductoService,public nvrlt:ToastrService, private router:Router)  { }
 
   ngOnInit(): void {
     this.fecha = new Date();

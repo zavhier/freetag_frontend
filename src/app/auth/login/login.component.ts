@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   formRecordarUsuario:FormGroup;
   emailEnvio:Email = new Email();
   access_token:any;
-  constructor(private _userService:UserService, public router:Router,  private nvrl: ToastrService, private fromBuilder:FormBuilder) { }
+  constructor(private _userService:UserService, public router:Router,  public nvrl: ToastrService, private fromBuilder:FormBuilder) { }
 
   ngOnInit(): void {
      this.formRecordarUsuario = this.fromBuilder.group({

@@ -15,7 +15,7 @@ export class EmailComponent implements OnInit {
   emailForm: FormGroup;
   email:Email = new Email();
   to:string= 'zavhier@gmail.com'
-  constructor(private formbuilder:FormBuilder,private emailService:EmailService,private nvTrl:ToastrService , private router:Router) { 
+  constructor(private formbuilder:FormBuilder,private emailService:EmailService,public nvTrl:ToastrService , private router:Router) { 
 
   }
 

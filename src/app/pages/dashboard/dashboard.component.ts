@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   access_token :any;
   usuario:Usuario  = new Usuario();
   formUpdate:FormGroup
-  constructor(private usuarioService:UserService , private nvtl:ToastrService , private formBuilder:FormBuilder) { }
+  constructor(private usuarioService:UserService , public nvtl:ToastrService , private formBuilder:FormBuilder) { }
 
 
   ngOnInit(): void {

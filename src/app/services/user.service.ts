@@ -30,7 +30,7 @@ export class UserService {
  */
   save(usuario:Usuario){
       usuario.rol = environment.rol;
-      usuario.idEmpresa = environment.company;
+      usuario.idempresa = environment.company;
       usuario.urlimg = "-";
       return this.http.post(environment.host + 'user' , usuario).pipe(
           tap((resp:any)=>{
