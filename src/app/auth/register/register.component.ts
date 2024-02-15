@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
         this.email.nombre = this.usuario.nombre;
         this.email.tipoenvio  = environment.tipoenvio;
         this.email.mensaje = environment.correoBienv;
-        this.usuario.company = environment.company;
+        this.usuario.idempresa =environment.company;
         this.usuario.fecha = new Date();
         this.usuario.rol  = environment.rol;
         this.usuerService.save(this.usuario).subscribe(resp=>{

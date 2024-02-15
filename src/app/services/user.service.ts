@@ -77,7 +77,7 @@ export class UserService {
   }
   
   getDataQr(id:any):Observable<any>{
-    return this.http.get(environment.host +"productbyqrcode" , id )
+    return this.http.get(environment.host +"productbyqrcode/"+ id )
   }
 
 }

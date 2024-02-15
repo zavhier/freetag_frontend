@@ -24,4 +24,7 @@ export class SearchComponent implements OnInit {
            this.usuario = rep.data[0];
      })
   }
+  onAvisar(){
+    
+  }
 }

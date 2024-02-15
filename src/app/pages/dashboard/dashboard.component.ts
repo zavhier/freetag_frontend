@@ -48,7 +48,6 @@ export class DashboardComponent implements OnInit {
         this.usuario.id = this.idUsuario;
         this.usuario.nombre = this.formUpdate.value['nombre'];
         this.usuario.email = 'zavhier@gmail.com'//this.formUpdate.value['email'];
-        this.usuario.password ='notfound';
         this.usuario.estado = 1;
         this.usuario.genero = 'M';
         this.usuario.telcel = this.formUpdate.value['telcel'];
