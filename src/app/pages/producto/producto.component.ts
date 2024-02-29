@@ -34,9 +34,7 @@ export class ProductoComponent implements OnInit {
 
 
   submitForm = () => {    
-debugger;
       if (this.productoForm.valid) {
-          
           this.producto.nombre = this.productoForm.value['nombre'];
           this.producto.descripcion = this.productoForm.value['descripcion'];
           this.producto.corido_qr = this.productoForm.value['codigo'];

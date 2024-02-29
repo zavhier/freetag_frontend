@@ -20,6 +20,7 @@ import { ProductoComponent } from './pages/producto/producto.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmailComponent } from './pages/email/email.component';
 import { SearchComponent } from './shared/search/search.component';
+import { QrComponent } from './pages/qr/qr.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { SearchComponent } from './shared/search/search.component';
     ProductoComponent,
     EmailComponent,
     SearchComponent,
+    QrComponent,
  
   ],
   imports: [

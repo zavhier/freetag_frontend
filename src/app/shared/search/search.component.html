@@ -5,20 +5,29 @@
         <div class="card">
             <div class="card-body" style="text-align: center;">
                 <div class="m-t-30"> <img src="../assets/images/6073873.png" class="img-circle" width="150" />
-                    <h4 class="card-title m-t-10">{{usuario.nombre}}</h4>
+                    <h4 class="card-title m-t-10">
+                      <span *ngIf="respuestaQr.razon_social_id > 0"> {{respuestaQr.nombre_rz}}</span>  
+                      <span *ngIf="respuestaQr.razon_social_id == 0"> {{respuestaQr.nombre}}</span>   
+                    </h4>
                     <h6 class="card-subtitle">Usuario freetags</h6>
                 </div>
             </div>
             <div>
                 <hr> </div>
-            <div class="card-body"> <small class="text-muted">Email </small>
-                <h6>{{usuario.email}}</h6> <small class="text-muted p-t-30 db">Teléfono</small>
-                <h6>{{usuario.telcel}}</h6> <small class="text-muted p-t-30 db">Referencia</small>
-                <h6>{{usuario.telref}}</h6>
-                <br/>
+            <div class="card-body"> <small class="text-muted">Información de contacto </small>
+                <div *ngIf="respuestaQr.razon_social_id > 0">
+                    <h6>{{respuestaQr.correo}}</h6> <small class="text-muted p-t-30 db">Teléfono</small>
+                    <h6>{{respuestaQr.telefono}}</h6>
+                    <br/>
+                </div>
+                <div *ngIf="respuestaQr.razon_social_id == 0">
+                    <h6>{{respuestaQr.email}}</h6> <small class="text-muted p-t-30 db">Teléfono</small>
+                    <h6>{{respuestaQr.telCel}}</h6>
+                    <br/>
+                </div>
+             
                 <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="button" (click)="onAvisar()">Avisar</button>
             </div>
         </div>
     </div>
-
 </div>

@@ -1,5 +1,5 @@
-enum EstadosBlue {
-	Activo,
-	Perdido,
-	Vincular,
+enum EstadosBlueEmun {
+	Activo = 2,
+	Perdido = 3,
+	INACTIVO = 1 ,
 }

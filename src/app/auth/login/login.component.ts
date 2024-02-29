@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(){
-
     this.loading = true;
     this._userService.login(this.email,this.password).subscribe(resp=>{
        if(resp.data.estado == '401'){
@@ -42,6 +41,8 @@ export class LoginComponent implements OnInit {
        }else{
           localStorage.setItem('access_token', resp.data.access_token);
           localStorage.setItem('usuarioId' ,  resp.data.idusuario);
+          localStorage.setItem('rol' ,  resp.data.rol);
+          localStorage.setItem('razon_social' ,  resp.data.razon_social);
           localStorage.setItem('IsLoggedIn' , 'true');
           this.loading= false;
           this.router.navigate(['/dashboard']);

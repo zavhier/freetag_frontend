@@ -12,6 +12,7 @@ import { ProductosComponent } from './pages/productos/productos.component';
 import {AuthGuard} from  './services/guard/authguard';
 import { EmailComponent } from './pages/email/email.component';
 import { SearchComponent } from './shared/search/search.component';
+import { QrComponent } from './pages/qr/qr.component';
 
 const routes: Routes = [
   {
@@ -23,13 +24,14 @@ const routes: Routes = [
       {path:'', component:DashboardComponent, canActivate: [AuthGuard]},    
       {path:'producto', component:ProductoComponent,canActivate: [AuthGuard]},    
       {path:'productos', component:ProductosComponent,canActivate: [AuthGuard]},
-      {path:'email' , component:EmailComponent , canActivate:[AuthGuard]}    
-
+      {path:'email' , component:EmailComponent , canActivate:[AuthGuard]},
+      {path:'qr' , component:QrComponent , canActivate:[AuthGuard]}    
     ]
    },
   {path:'login', component:LoginComponent},
   {path:'registro', component:RegisterComponent},
-  {path:'search/:id', component:SearchComponent},
+  {path:'registro/:id', component:RegisterComponent},
+  {path:'buscar/:id', component:SearchComponent},
   {path:'**', component:NopagefoundComponent},
 ];
 

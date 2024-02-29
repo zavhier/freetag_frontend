@@ -15,13 +15,14 @@ export class UserService {
 
   }
   login(username:string, password:string){
+    debugger;
         var formData: any = new FormData();
         formData.append('username',username);
         formData.append('password', password);
-        formData.append('company',  environment.company)
+        formData.append('company',   username=='admin' ?  environment.companyAdmin :  environment.company)
       return this.http.post(environment.host +'auth', formData).pipe(
        tap((resp:any)=>{
-         
+          console.log(resp)
         }))
   }
 /*
@@ -29,7 +30,8 @@ export class UserService {
  * @return usuario
  */
   save(usuario:Usuario){
-      usuario.rol = environment.rol;
+     
+      usuario.rol =  usuario.rol == 'rz' ?  usuario.rol :environment.rol;
       usuario.idempresa = environment.company;
       usuario.urlimg = "-";
       return this.http.post(environment.host + 'user' , usuario).pipe(
@@ -79,5 +81,11 @@ export class UserService {
   getDataQr(id:any):Observable<any>{
     return this.http.get(environment.host +"productbyqrcode/"+ id )
   }
+  getUsuarioByEmail(email:string):Observable<any>{
+     return this.http.get(environment.host + 'userbyemail/' + email);
+  }
 
+  getValidarExisteUsuario(email:string):Observable<any>{
+       return this.http.get(environment.host + 'checkexistuser/' + email +'x')
+  }
 }

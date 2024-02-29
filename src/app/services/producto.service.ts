@@ -31,4 +31,22 @@ export class ProductoService {
     const headers = { 'Authorization': 'Bearer ' + access_token}
      return this.http.put(environment.host + 'produc', producto, {headers: headers} );
   }
+  getProductByRazonSocial(razon_social:any, access_token:string):Observable<any>{
+     const headers = { 'Authorization': 'Bearer ' + access_token}
+     return this.http.get(environment.host + "productbysocialreason/" + razon_social,  {headers: headers}  )
+  }
+
+  updateProductoQrByNewUsuarioId(usuario:number, qr:string){
+    return this.http.put(environment.host + "productbyqrcode" ,{"codigo_qr":qr, "usuario_id":usuario})
+  }
+
+  getProductoByQr(qr:string):Observable<any>{
+    return this.http.get(environment.host + 'productbyqrcode/' + qr)
+  }
+
+  updateProductEstado(id:number, estadoId:number, access_token:any):Observable<any>{
+    const headers = { 'Authorization': 'Bearer ' + access_token}
+    return this.http.put(environment.host + "producbystate" ,{"id":id, "tipo_estado_id":estadoId},{headers: headers})
+  }
+  
 }
