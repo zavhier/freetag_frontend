@@ -31,7 +31,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getData(){
-    this.usuarioService.get(this.idUsuario, this.access_token).subscribe(resp=>{
+    this.usuarioService.get(this.idUsuario).subscribe(resp=>{
       this.usuario = resp.data[0];
       localStorage.setItem('nombre',  this.usuario.nombre);
       localStorage.setItem('email',  this.usuario.email);
@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     if (this.formUpdate.valid) {
         this.usuario.id = this.idUsuario;
         this.usuario.nombre = this.formUpdate.value['nombre'];
-        this.usuario.email = 'zavhier@gmail.com'//this.formUpdate.value['email'];
+        this.usuario.email =  this.formUpdate.value['email'];
         this.usuario.estado = 1;
         this.usuario.genero = 'M';
         this.usuario.telcel = this.formUpdate.value['telcel'];

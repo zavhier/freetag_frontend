@@ -18,8 +18,7 @@ export class QrComponent implements OnInit {
   
   ngOnInit(): void {
     this.razon_social = localStorage.getItem('razon_social');
-    this.access_token = localStorage.getItem('access_token') ;
-    this.getProductoByRazonSocial();
+     this.getProductoByRazonSocial();
   }
 
    getProductoByRazonSocial(){
@@ -29,7 +28,7 @@ export class QrComponent implements OnInit {
     })
   }
   onVerCliente(qr: any){
-       this.userService.get(qr.usuario_id, this.access_token).subscribe(resp=>{
+       this.userService.get(qr.usuario_id).subscribe(resp=>{
               this.usuario = resp.data[0]
        })
   }

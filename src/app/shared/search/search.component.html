@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div>
-                <hr> </div>
+            <hr> </div>
             <div class="card-body"> <small class="text-muted">Información de contacto </small>
                 <div *ngIf="respuestaQr.razon_social_id > 0">
                     <h6>{{respuestaQr.correo}}</h6> <small class="text-muted p-t-30 db">Teléfono</small>
@@ -25,8 +25,8 @@
                     <h6>{{respuestaQr.telCel}}</h6>
                     <br/>
                 </div>
-             
-                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="button" (click)="onAvisar()">Avisar</button>
+                <textarea class="textarea_editor form-control" rows="3" placeholder="Te agradeceriamos si nos podemos enviar mas información"  [(ngModel)]="_notas"></textarea>
+                <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light"  type="button" (click)="onAvisar()">Avisar</button>
             </div>
         </div>
     </div>

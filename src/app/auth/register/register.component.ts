@@ -8,6 +8,7 @@ import { Email } from 'src/app/models/email.model';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductoService } from 'src/app/services/producto.service';
+import {ErrorCodeEmun  } from '../../emuns/errorcode.emun';
 
 
 @Component({
@@ -25,9 +26,10 @@ export class RegisterComponent implements OnInit {
   _activarQr:boolean = false;
   access_token:any;
   usuarioId:any;
-  constructor(public formBuilder:FormBuilder, public usuerService:UserService, public nvTrl:ToastrService ,
-              private  emailService:EmailService, private router:Router, private activatedRoute:ActivatedRoute, private productoService:ProductoService) { 
-
+  constructor(
+              public formBuilder:FormBuilder, public usuerService:UserService, public nvTrl:ToastrService ,
+              private  emailService:EmailService, private router:Router, private activatedRoute:ActivatedRoute,
+              private productoService:ProductoService) { 
               }
 
   ngOnInit(): void {
@@ -74,8 +76,7 @@ export class RegisterComponent implements OnInit {
               this.usuario.fecha = new Date();
               this.usuario.rol  = environment.rol;
               this.usuerService.save(this.usuario).subscribe(resp=>{
-                    if(resp.estado != '404'){
-                        debugger;
+                    if(resp.estado !=  ErrorCodeEmun.ERROR_404 ){
                       this.nvTrl.success('¡Genial!, Ya casi sos parte de freetags' )
                       this.envioMail();
                       this.updateCodigoQrByCliente(resp.data.iduser);
@@ -105,7 +106,10 @@ export class RegisterComponent implements OnInit {
           this.nvTrl.success('¡Genial!, su qr ya esta vinculado' )
           this.productoService.getProductoByQr(this.codigo).subscribe(resp=>{
             let productoId = resp.data[0].id;
-            this.productoService.updateProductEstado(productoId , 2, this.access_token).subscribe(resp=>{console.log(resp)})
+            setTimeout(() => {
+              debugger;
+              this.productoService.updateProductEstado(productoId , 2, this.access_token).subscribe(resp=>{console.log(resp);  this.router.navigate(['/login']);})  
+            }, 200);
           })
        })
   }
@@ -149,23 +153,23 @@ export class RegisterComponent implements OnInit {
        let password  = this.registroForm.value['password']
        let email:string  = this.registroForm.value['email'] 
        if(password !='') {
-        this.usuerService.login(email,password).subscribe(resp=>{
-          if(resp.data.estado == '401'){
-           this.nvTrl.error('¡Ups, algo malo paso!')
-          }else{
-             this.access_token =  resp.data.access_token;
-             this.usuarioId  =  resp.data.idusuario;
-             this.updateCodigoQrByCliente(this.usuarioId);
-            
-          }
-        })
+        if(this.codigo != ''){
+          this.usuerService.login(email,password).subscribe(resp=>{
+            debugger;
+            if(resp.data.estado == ErrorCodeEmun.ERROR_404 ||resp.data.estado == ErrorCodeEmun.ERROR_401){
+                 this.nvTrl.error('¡Ups, algo malo paso!')
+            }else{
+              this.access_token =  resp.data.access_token;
+              this.usuarioId  =  resp.data.idusuario;
+              this.updateCodigoQrByCliente(this.usuarioId);
+            }
+          })
+        }else{
+          this.nvTrl.warning('¡Ups!, esta faltando el código ');   
+        }
 
-        
        }else{
         this.nvTrl.warning('¡Ups!, No te olvides de ingresar el mail ');
        }
-       
-
-
   }
 }

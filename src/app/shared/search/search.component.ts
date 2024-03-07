@@ -20,6 +20,7 @@ export class SearchComponent implements OnInit {
   id:any
   respuestaQr:RespuestaQr = new RespuestaQr();
   email:Email= new Email();
+  _notas:string = '';
   constructor(private usuarioService:UserService, private router:ActivatedRoute, private route:Router, private geoService:GeoService, private emailService:EmailService, private toast:ToastrService) { }
 
   ngOnInit( ): void {
@@ -44,15 +45,19 @@ export class SearchComponent implements OnInit {
   }
   onAvisar(){
        this.geoService.getUserLocation().then(res=>{
-           console.log("La geo es de " , res)
            this.email.asunto = 'Hola!, te estamos buscando';
            this.email.correo = this.respuestaQr.correo;
            this.email.nombre = this.respuestaQr.nombre;
            this.email.tipoenvio  = environment.tipoenvio;
-           this.email.mensaje = environment.correoBusqueda;
-           this.email.link = 'https://www.google.com/maps/dir//' +res[0] +"," + res[1];
+           this.email.mensaje = environment.correoBusqueda 
+           if(this._notas != ''){
+              this.email.mensaje = this.email.mensaje + " y nos compartio la siguiente información, " + this._notas;
+           }
+           this.email.link = 'https://www.google.com/maps?q=' +res[0] +"," + res[1] +"&z=22";
+           debugger;
            this.emailService.send(this.email).subscribe(resp=>{
                  this.toast.show('Muchas gracias!!!')
+                 this._notas = '';
            })
        })
   }
