@@ -104,13 +104,6 @@ export class RegisterComponent implements OnInit {
   updateCodigoQrByCliente(iduser:number){
        this.productoService.updateProductoQrByNewUsuarioId(iduser,this.codigo).subscribe(resp=>{
           this.nvTrl.success('¡Genial!, su qr ya esta vinculado' )
-          this.productoService.getProductoByQr(this.codigo).subscribe(resp=>{
-            let productoId = resp.data[0].id;
-            setTimeout(() => {
-              debugger;
-              this.productoService.updateProductEstado(productoId , 2, this.access_token).subscribe(resp=>{console.log(resp);  this.router.navigate(['/login']);})  
-            }, 200);
-          })
        })
   }
   onCliente(){
@@ -138,6 +131,7 @@ export class RegisterComponent implements OnInit {
        let  email = this.registroForm.value['email'];
        if(email != ''){
             this.usuerService.getValidarExisteUsuario(email).subscribe(resp=>{
+              debugger;
                if(resp.data[0].existe == '1'){
                     this.nvTrl.warning('¡Ups!, Lo siento el email ya esta registrado');
                }

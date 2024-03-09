@@ -53,11 +53,15 @@ export class SearchComponent implements OnInit {
            if(this._notas != ''){
               this.email.mensaje = this.email.mensaje + " y nos compartio la siguiente información, " + this._notas;
            }
+
+           this.email.mensaje = this.email.mensaje  + ' Código ' + this.respuestaQr.codigo_qr;
+
            this.email.link = 'https://www.google.com/maps?q=' +res[0] +"," + res[1] +"&z=22";
            debugger;
            this.emailService.send(this.email).subscribe(resp=>{
                  this.toast.show('Muchas gracias!!!')
                  this._notas = '';
+                 this.route.navigate(["/login"])
            })
        })
   }

@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {tap} from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Usuario } from '../models/usuario.model';
 import { Observable } from 'rxjs';
 import {WriteLogServiceService} from '../services/write-log-service.service';
-import { error } from '@angular/compiler/src/util';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +30,6 @@ export class UserService {
  * @return usuario
  */
   save(usuario:Usuario){
-     
       usuario.rol =  usuario.rol == 'rz' ?  usuario.rol :environment.rol;
       usuario.idempresa = environment.company;
       usuario.urlimg = "-";
@@ -48,8 +46,8 @@ export class UserService {
   * @param id 
   * @returns  Usuario
   */
-  get(id:any):Observable<any>{
-      const headers = { 'Authorization': 'Bearer ' + this.access_token}
+  get(id:any, access_token_usr:any):Observable<any>{
+      const headers = { 'Authorization': 'Bearer ' + access_token_usr}
       return this.http.get(environment.host+"userbyid/"+id , {headers: headers}).pipe(
         tap((resp:any)=>{
             console.log(resp)
@@ -89,11 +87,22 @@ export class UserService {
      return this.http.post(environment.host + 'userbyemail ',{"email":email},{headers: headers});
   }
   getValidarExisteUsuario(email:string):Observable<any>{
-       return this.http.post(environment.host + 'checkexistuser', {"email":email, 'company':environment.company})
+    debugger;
+       return this.http.post(environment.host + 'checkexistsuser', {"email":email, 'idcompania':environment.company})
   }
 
 
   writeLog(msj:string){
        this.log.write(msj).subscribe(resp=>{console.log(resp)})
   }
+
+
+  sso(access_token:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'
+    });
+     return this.http.post(environment.hostqr,  {'access_token':access_token, 'estado':200},{ headers })
+  }
+
+
 }

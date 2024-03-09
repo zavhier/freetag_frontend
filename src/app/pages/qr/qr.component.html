@@ -33,7 +33,7 @@
                                 <td *ngIf="item.tipo_estado_id == 2"><span class="label label-success">Activo</span></td>
                                 <td *ngIf="item.tipo_estado_id == 1"><span class="label label-info">Inactivo</span></td>
                                 <td>
-                                    <button  class="btn btn-outline-principal fom-control btn-grid "  data-toggle="modal" data-target="#add-borrar" style="background: transparent" color="red"><i class="fa fa-trash"></i></button>
+                                    <button  class="btn btn-outline-principal fom-control btn-grid "  data-toggle="modal" data-target="#add-borrar" style="background: transparent" color="red" (click)="onBorrar(item)"><i class="fa fa-trash"></i></button>
                                     <!-- <button  class="btn btn-outline-principal fom-control btn-grid " (click)="onClickProducto(item)"  data-toggle="modal" data-target="#add-contact" style="background: transparent">
                                         <i class="fa fa-binoculars" aria-hidden="true"></i>
                                     </button> -->

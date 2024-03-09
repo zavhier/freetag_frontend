@@ -35,19 +35,24 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     this.loading = true;
-    this._userService.login(this.email,this.password).subscribe(resp=>{
-       if(resp.data.estado == '401'){
-        this.nvrl.error('¡Ups, algo malo paso!')
-       }else{
-          localStorage.setItem('access_token', resp.data.access_token);
-          localStorage.setItem('usuarioId' ,  resp.data.idusuario);
-          localStorage.setItem('rol' ,  resp.data.rol);
-          localStorage.setItem('razon_social' ,  resp.data.razon_social);
-          localStorage.setItem('IsLoggedIn' , 'true');
-          this.loading= false;
-          this.router.navigate(['/dashboard']);
-       }
-     })
+    if(this.email != '' && this.password != ''){
+        this._userService.login(this.email,this.password).subscribe(resp=>{
+          if(resp.data.estado == '401'){
+          this.nvrl.warning('¡Ups, crendenciales invalidas!')
+          }else{
+            localStorage.setItem('access_token', resp.data.access_token);
+            localStorage.setItem('usuarioId' ,  resp.data.idusuario);
+            localStorage.setItem('rol' ,  resp.data.rol);
+            localStorage.setItem('razon_social' ,  resp.data.razon_social);
+            localStorage.setItem('IsLoggedIn' , 'true');
+            this.loading= false;
+            this.router.navigate(['/dashboard']);
+          }
+        })
+    }else{
+      this.nvrl.warning('¡Ups, están faltando datos!')
+    }
+   
 
   }
 
@@ -70,7 +75,7 @@ export class LoginComponent implements OnInit {
        
     } else {
         this.nvrl.warning('¡Ups!, Faltan datos');
-        return console.log('Please provide all the required values!');
+          return console.log('Please provide all the required values!');
     }
   };
 

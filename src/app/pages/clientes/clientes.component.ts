@@ -14,10 +14,14 @@ import { environment } from 'src/environments/environment';
 })
 export class ClientesComponent implements OnInit {
   razonSociales :RazonSocial []= []
+  access_token:any
+  estado:string='200';
+  url:string;
   @ViewChild('buttonCerrar') buttonCerrar: ElementRef<HTMLElement>;
   rzForm:FormGroup
   constructor(private rzService:RazonSocialService, private usrService:UserService,  private formBuilder:FormBuilder, private nvrlt:ToastrService) { 
-     
+    this.url = environment.hostqr;
+     this.access_token = localStorage.getItem('access_token'); 
      this.rzForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(4)]],
       direccion: ['', [Validators.required, Validators.minLength(4)]],
@@ -100,5 +104,10 @@ export class ClientesComponent implements OnInit {
   };
 
 
+
+  onAbrirGeneradorDeCogigo(){
+  //  window.open(`${this.url}?token=${this.access_token}&state=${this.estado}`, '_blank');
+  this.usrService.sso(this.access_token).subscribe(res=>{})
+  }
 }
 

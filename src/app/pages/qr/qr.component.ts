@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { ErrorCodeEmun } from 'src/app/emuns/errorcode.emun';
 import { Producto } from 'src/app/models/producto.model';
 import { Usuario } from 'src/app/models/usuario.model';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UserService } from 'src/app/services/user.service';
+import {BorradoLogicoEmun} from 'src/app/emuns/utils.emun';
+
 
 @Component({
   selector: 'app-qr',
@@ -14,10 +18,11 @@ export class QrComponent implements OnInit {
   productos:Producto [] = [];
   access_token:any;
   usuario:Usuario = new Usuario();
-  constructor(private productoService:ProductoService, private userService:UserService) { }
+  constructor(private productoService:ProductoService, private userService:UserService, private toas:ToastrService) { }
   
   ngOnInit(): void {
     this.razon_social = localStorage.getItem('razon_social');
+    this.access_token = localStorage.getItem('access_token');
      this.getProductoByRazonSocial();
   }
 
@@ -28,8 +33,20 @@ export class QrComponent implements OnInit {
     })
   }
   onVerCliente(qr: any){
-       this.userService.get(qr.usuario_id).subscribe(resp=>{
+       this.userService.get(qr.usuario_id,this.access_token).subscribe(resp=>{
               this.usuario = resp.data[0]
        })
+  }
+  onBorrar(item:Producto){
+         this.productoService.deleteProdcuto(item.id, BorradoLogicoEmun.BORRADO  ,this.access_token).subscribe(resp=>{
+             if(resp.data.estado == ErrorCodeEmun.ESTADO_OK) {
+                  this.toas.info('El producto se ha eliminado correctamente')
+                  let idx = this.productos.indexOf(item);
+                  this.productos.splice(idx,1);
+             }else{
+                  this.toas.error('¡Ups!, algo malo paso')
+             }
+        })
+  
   }
 }

@@ -21,17 +21,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
      this.idUsuario = Number(localStorage.getItem('usuarioId'));
      this.access_token = localStorage.getItem('access_token'); 
+     console.log('el usuario es ',  this.idUsuario , 'acce ' , this.access_token);
      this.getData();
      this.formUpdate = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(2)]],
-      telcel: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      telref: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+      telcel: ['', [Validators.required, Validators.minLength(8)]],
+      telref: ['', [Validators.required, Validators.minLength(8)]]
      })
      
   }
 
   getData(){
-    this.usuarioService.get(this.idUsuario).subscribe(resp=>{
+    this.usuarioService.get(this.idUsuario, this.access_token).subscribe(resp=>{
       this.usuario = resp.data[0];
       localStorage.setItem('nombre',  this.usuario.nombre);
       localStorage.setItem('email',  this.usuario.email);
@@ -43,17 +44,14 @@ export class DashboardComponent implements OnInit {
   }
   
   onSubmitFor = () => {
-    debugger;
     if (this.formUpdate.valid) {
         this.usuario.id = this.idUsuario;
         this.usuario.nombre = this.formUpdate.value['nombre'];
-        this.usuario.email =  this.formUpdate.value['email'];
+        this.usuario.email =   this.usuario.email;
         this.usuario.estado = 1;
         this.usuario.genero = 'M';
         this.usuario.telcel = this.formUpdate.value['telcel'];
         this.usuario.telref = this.formUpdate.value['telref'];
-        this.usuario.rol  = environment.rol;
-
         this.usuarioService.update(this.usuario, this.access_token).subscribe(resp=>{
             this.nvtl.success('¡Genial!, los información se cambio correctamente');      
             this.getData();
@@ -66,5 +64,22 @@ export class DashboardComponent implements OnInit {
         return console.log('Please provide all the required values!');
     }
   };
+
+  validateFormat(event) {
+    let key;
+    if (event.type === 'paste') {
+      key = event.clipboardData.getData('text/plain');
+    } else {
+      key = event.keyCode;
+      key = String.fromCharCode(key);
+    }
+    const regex = /[0-9]|\./;
+     if (!regex.test(key)) {
+      event.returnValue = false;
+       if (event.preventDefault) {
+        event.preventDefault();
+       }
+     }
+    }
 
 }
