@@ -6,5 +6,6 @@ export class Email {
     tipoenvio:string
     mensaje:string;
     email:string;
+    link:string;
 
 }

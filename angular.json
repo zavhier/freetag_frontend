@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "frontgapharma": {
+    "freetags": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontgapharma",
+            "outputPath": "dist/freetags",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -45,7 +45,7 @@
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "budgets": [
                 {
                   "type": "initial",
@@ -64,18 +64,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "frontgapharma:build"
+            "browserTarget": "freetags:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "frontgapharma:build:production"
+              "browserTarget": "freetags:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontgapharma:build"
+            "browserTarget": "freetags:build"
           }
         },
         "test": {
@@ -112,18 +112,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "frontgapharma:serve"
+            "devServerTarget": "freetags:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "frontgapharma:serve:production"
+              "devServerTarget": "freetags:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "frontgapharma",
+  "defaultProject": "freetags",
   "cli": {
     "analytics": "90d30084-9ae1-4078-8189-7980f57f093e"
   }

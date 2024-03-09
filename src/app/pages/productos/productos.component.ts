@@ -17,7 +17,7 @@ export class ProductosComponent implements OnInit {
   id:number;
   productos:Producto [] = [];
   _estado:string;
-  constructor(private productoService:ProductoService, private toas:ToastrService) { }
+  constructor(private productoService:ProductoService, public toas:ToastrService) { }
 
   ngOnInit(): void {
      this.id = Number(localStorage.getItem('usuarioId'));

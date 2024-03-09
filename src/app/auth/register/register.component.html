@@ -4,31 +4,22 @@
             <form class="form-horizontal form-material" id="loginform" action="index.html">
                 <a href="javascript:void(0)" class="text-center db"><img src="./assets/images/logo-icon.png" alt="Home" /><br/>
                     <img src="./assets/images/logo-text.png" alt="Home" /></a>
-                <h3 class="box-title m-t-40 m-b-0">Regístrate ahora</h3><small>Crea tu cuenta y disfruta</small>
+               <span *ngIf="!soyCliente"> <h3 class="box-title m-t-40 m-b-0">Regístrate ahora</h3><small>Crea tu cuenta y disfruta</small></span>
+               <span *ngIf="soyCliente"> <h3 class="box-title m-t-40 m-b-0">Ingresa a tu cuenta</h3><small>ingresado tu email y password</small></span>
                 <form [formGroup]="registroForm" (ngSubmit)="submitForm()" novalidate>    
-                    <div class="form-group m-t-20">
+                    <div class="form-group m-t-20" *ngIf="!soyCliente">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" required="" placeholder="Name" formControlName="nombre">
                         </div>
                     </div>
-                    <div class="form-group m-t-20">
+                    <div class="form-group m-t-20" *ngIf="!soyCliente">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="apellido" formControlName="apellido">
+                            <input class="form-control" type="text" required="" placeholder="apellido" formControlName="apellido" [disabled]="soyCliente">
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Email" formControlName="email">
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Teléfono" formControlName="telref">
-                        </div>
-                    </div>
-                    <div class="form-group ">
-                        <div class="col-xs-12">
-                            <input class="form-control" type="text" required="" placeholder="Celular" formControlName="telcel">
+                            <input class="form-control" type="text" required="" placeholder="Email" formControlName="email" (focusout)="onValidarUsuario();"> 
                         </div>
                     </div>
                     <div class="form-group ">
@@ -36,16 +27,32 @@
                             <input class="form-control" type="password" required="" placeholder="Password" formControlName="password">
                         </div>
                     </div>
-                    <div class="form-group text-center m-t-20">
+                    <div class="form-group " *ngIf="!soyCliente">
                         <div class="col-xs-12">
-                            <button class="btn btn-info btn-lg btn-block text-uppercase waves-effect waves-light" type="submit">Sign Up</button>
+                            <input class="form-control" type="text" required="" placeholder="Teléfono" formControlName="telref" >
                         </div>
                     </div>
-                </form>        
-                <div class="form-group m-b-0">
-                    <div class="col-sm-12 text-center">
-                        <p>¿Tiene una cuenta ? <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="text-info m-l-5"><b>Volver</b></a></p>
+                    <div class="form-group " *ngIf="!soyCliente">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Celular" formControlName="telcel">
+                        </div>
                     </div>
+                    <div class="form-group ">
+                        <div class="col-xs-12">
+                            <input class="form-control" type="text" required="" placeholder="Código Qr" value={{codigo}}  disabled>
+                        </div>
+                    </div>
+                   
+                    <div class="form-group text-center m-t-20">           
+                            <button class="btn btn-info btn-md  btn-block text-uppercase waves-effect waves-light" type="submit" style="width: 40%;">Sign Up</button>
+                            <button class="btn btn-info btn-md btn-block text-uppercase waves-effect waves-light" type="button" [routerLink]="['/login']"  style="width: 40%; margin-top: -1px; margin-left: 20px ">Back</button>
+                     </div>
+                    
+                </form>        
+                <div class="form-group m-b-0" *ngIf="_activarQr">
+                    <div class="col-sm-12 text-center" *ngIf="codigo !=''">
+                        <p style="text-align: center;">¿Tiene una cuenta ?  <a  (click)="onCliente()" routerLinkActive="router-link-active"  class="text-info m-l-5"><b>{{_soyOno}}!</b></a></p>
+                     </div>
                 </div>
             </form>
         </div>

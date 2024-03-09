@@ -3,7 +3,7 @@ export class Producto{
    descripcion:string;
    nombre:string;
    fecha_creacion:Date;
-   corido_qr:string;
+   codigo_qr:string;
    url_qr:string;
    serial:string;
    razon_social_id:number;
