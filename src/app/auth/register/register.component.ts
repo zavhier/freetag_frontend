@@ -34,6 +34,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.codigo =  this.activatedRoute.snapshot.paramMap.get('id')
+    debugger;
     if(this.codigo != '' || this.codigo != null){
           this._activarQr = true
     }else{
@@ -53,20 +54,25 @@ export class RegisterComponent implements OnInit {
         ],
       ],
       telcel: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      telref: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
+    //  telref: ['', [Validators.required, Validators.pattern('^[0-9]+$')]]
     });
   }
   submitForm = () => {
-    debugger;
+     if(this.codigo  != ''){
+        this.nvTrl.warning('Ups!, Falta el código qr, no te olvides de escanear' )
+        return;
+     }
+          
      if(!this.soyCliente){ //"No es == a si es cliente por eso no debe validar el formulario "
             if (this.registroForm.valid) {
               this.usuario.nombre = this.registroForm.value['nombre'];
               this.usuario.email = this.registroForm.value['email'];
               this.usuario.password = this.registroForm.value['password'];
               this.usuario.estado = 1;
-              this.usuario.genero = 'M';
+              this.usuario.genero = 'X';
               this.usuario.telcel = this.registroForm.value['telcel'];
-              this.usuario.telref = this.registroForm.value['telref'];
+              this.usuario.telref = this.registroForm.value['telcel'];
+          //    this.usuario.telref = this.registroForm.value['telref'];
               this.email.asunto = '¡Genial!, Ya casi sos parte de freetags';
               this.email.correo = this.usuario.email;
               this.email.nombre = this.usuario.nombre;
@@ -86,7 +92,6 @@ export class RegisterComponent implements OnInit {
                     }
               })
               return false;
-        
           } else {
               this.nvTrl.warning('¡Ups!, Faltan datos');
               return console.log('Please provide all the required values!');

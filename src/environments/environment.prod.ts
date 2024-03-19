@@ -10,5 +10,7 @@ export const environment = {
   companyAdmin: 0,
   correoBienv:'¡Genial!, Ya casi sos parte de freetags,  te pedimos que completes tus datos y valides el código Qr con tu producto',
   correoBusqueda:'Alguien realizó una lectura del código escaner',
-  hostqr:'https://freetags.mysite.com.ar/qrgenerator/barcode.php'
+  hostqr:'https://freetags.mysite.com.ar/qrgenerator/barcode.php',
+  hostUrlCodigo:'https://freetags.mysite.com.ar/qrgenerator',
+  passwordRz:'password1234'
 }
