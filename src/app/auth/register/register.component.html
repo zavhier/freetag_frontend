@@ -27,7 +27,7 @@
                             <input class="form-control" type="password" required="" placeholder="Password" formControlName="password">
                         </div>
                     </div>
-                    <div class="form-group " *ngIf="!soyCliente">
+                    <div class="form-group " *ngIf="!soyCliente" style="display: none;">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" required="" placeholder="Teléfono" formControlName="telref" >
                         </div>
@@ -42,12 +42,10 @@
                             <input class="form-control" type="text" required="" placeholder="Código Qr" value={{codigo}}  disabled>
                         </div>
                     </div>
-                   
-                    <div class="form-group text-center m-t-20">           
+                    <div class="form-group text-center m-t-20" style="margin: 0;padding: 0;" >           
                             <button class="btn btn-info btn-md  btn-block text-uppercase waves-effect waves-light" type="submit" style="width: 40%;">Sign Up</button>
                             <button class="btn btn-info btn-md btn-block text-uppercase waves-effect waves-light" type="button" [routerLink]="['/login']"  style="width: 40%; margin-top: -1px; margin-left: 20px ">Back</button>
                      </div>
-                    
                 </form>        
                 <div class="form-group m-b-0" *ngIf="_activarQr">
                     <div class="col-sm-12 text-center" *ngIf="codigo !=''">

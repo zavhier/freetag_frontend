@@ -6,6 +6,8 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { ProductoService } from 'src/app/services/producto.service';
 import { UserService } from 'src/app/services/user.service';
 import {BorradoLogicoEmun} from 'src/app/emuns/utils.emun';
+import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +20,7 @@ export class QrComponent implements OnInit {
   productos:Producto [] = [];
   access_token:any;
   usuario:Usuario = new Usuario();
-  constructor(private productoService:ProductoService, private userService:UserService, private toas:ToastrService) { }
+  constructor(private productoService:ProductoService, private userService:UserService, private toas:ToastrService, private router:Router) { }
   
   ngOnInit(): void {
     this.razon_social = localStorage.getItem('razon_social');
@@ -27,7 +29,6 @@ export class QrComponent implements OnInit {
   }
 
    getProductoByRazonSocial(){
-    debugger;
     this.productoService.getProductByRazonSocial(this.razon_social, this.access_token).subscribe(resp=>{
           this.productos  = resp.data;
     })
@@ -43,10 +44,19 @@ export class QrComponent implements OnInit {
                   this.toas.info('El producto se ha eliminado correctamente')
                   let idx = this.productos.indexOf(item);
                   this.productos.splice(idx,1);
-             }else{
+             } else if(resp.estado == ErrorCodeEmun.ERROR_401){
+                  this.toas.info('¡Ups!, la sesión se termino' ) 
+                  this.router.navigate(['/login'])
+             }
+             else{
                   this.toas.error('¡Ups!, algo malo paso')
              }
         })
-  
   }
+  
+  onVerCodigo(item:Producto){
+    let url = environment.hostUrlCodigo +"/"+ item.urlimg + "/"  + item.codigo_qr +".png"
+    window.open(url, "_blank");
+  } 
+
 }

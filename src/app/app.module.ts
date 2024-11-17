@@ -50,7 +50,7 @@ import { LandingComponent } from './pages/landing/landing.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule, // required animations module
+    //BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot({
       timeOut: 3000,
       positionClass: 'toast-top-center',

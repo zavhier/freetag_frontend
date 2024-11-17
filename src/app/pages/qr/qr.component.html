@@ -6,8 +6,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>#</th>
+                                <th>Qr</th>
+                                <th>Id</th>
                                 <th>Nombre</th>
                                 <th>Descripción</th>
                                 <th>Código</th>
@@ -19,7 +19,7 @@
                         </thead>
                         <tbody>
                              <tr  *ngFor="let item of productos">
-                                <td><img src="../../../assets/images/logo-icon.png"  style="width: 10%;"/> </td>
+                                <td><img src="../../../assets/images/logo-icon.png"  style="width:42%;"  (click)="onVerCodigo(item)" /> </td>
                                 <td>{{item.id}}</td>
                                 <td>{{item.nombre}}</td>
                                 <td>{{item.descripcion}}</td>

@@ -64,11 +64,20 @@ export class UserService {
        })
     )
   }
-  recuperarUsuario(email:string):Observable<any>{
+  /*recuperarUsuario(email:string):Observable<any>{
     var formData: any = new FormData();
     formData.append('email',email);
     return this.http.post(environment.host +'recoveruser', formData)
-  }
+  }*/
+
+  recuperarUsuario(email: string): Observable<any> {
+    const body = { email: email }; // Crea el objeto con el email
+    return this.http.post(environment.host + 'recoveruser', body, {
+        headers: { 'Content-Type': 'application/json' } // Asegúrate de que el tipo de contenido sea JSON
+    });
+}
+
+
   update(usuario:Usuario, access_token:any):Observable<any>{
     const headers = { 'Authorization': 'Bearer ' + access_token}
     return this.http.put(environment.host + "user" , usuario, {headers: headers} ).pipe(
