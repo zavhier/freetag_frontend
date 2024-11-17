@@ -64,6 +64,7 @@ export class UserService {
        })
     )
   }
+<<<<<<< HEAD
   /*recuperarUsuario(email:string):Observable<any>{
     var formData: any = new FormData();
     formData.append('email',email);
@@ -78,6 +79,13 @@ export class UserService {
 }
 
 
+=======
+  recuperarUsuario(email:string):Observable<any>{
+    var formData: any = new FormData();
+    formData.append('email',email);
+    return this.http.post(environment.host +'recoveruser', formData)
+  }
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
   update(usuario:Usuario, access_token:any):Observable<any>{
     const headers = { 'Authorization': 'Bearer ' + access_token}
     return this.http.put(environment.host + "user" , usuario, {headers: headers} ).pipe(
@@ -90,6 +98,17 @@ export class UserService {
   }
   getDataQr(id:any):Observable<any>{
     return this.http.get(environment.host +"productbyqrcode/"+ id )
+<<<<<<< HEAD
+=======
+  }
+  getUsuarioByEmail(email:string, access_token):Observable<any>{
+    const headers = { 'Authorization': 'Bearer ' + access_token}
+     return this.http.post(environment.host + 'userbyemail ',{"email":email},{headers: headers});
+  }
+  getValidarExisteUsuario(email:string):Observable<any>{
+    debugger;
+       return this.http.post(environment.host + 'checkexistsuser', {"email":email, 'idcompania':environment.company})
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
   }
   getUsuarioByEmail(email:string, access_token):Observable<any>{
     const headers = { 'Authorization': 'Bearer ' + access_token}
@@ -99,6 +118,20 @@ export class UserService {
     debugger;
        return this.http.post(environment.host + 'checkexistsuser', {"email":email, 'idcompania':environment.company})
   }
+
+
+  writeLog(msj:string){
+       this.log.write(msj).subscribe(resp=>{console.log(resp)})
+  }
+
+
+  sso(access_token:any):Observable<any>{
+    const headers = new HttpHeaders({
+      'Access-Control-Allow-Origin': '*'
+    });
+     return this.http.post(environment.hostqr,  {'access_token':access_token, 'estado':200},{ headers })
+  }
+
 
 
   writeLog(msj:string){

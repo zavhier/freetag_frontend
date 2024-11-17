@@ -8,9 +8,5 @@ export const environment = {
   company: 1, //freetags}
   companyAdmin: 0,
   tipoenvio: '3',
-  correoBienv:'¡Genial!; Ya casi sos parte de freetags; te pedimos que completes tus datos y valides el código Qr con tu producto',
-  correoBusqueda:'Alguien realizó una lectura del código escaner',
-  hostqr:'https://bag-tag.vip/qrgenerator/barcode.php',
-  hostUrlCodigo:'https://bag-tag.vip/qrgenerator',
-  passwordRz:'password1234'
+  correoBienv:'¡Genial!; Ya casi sos parte de freetags; te pedimos que completes tus datos y valides el código Qr con tu producto'
 };

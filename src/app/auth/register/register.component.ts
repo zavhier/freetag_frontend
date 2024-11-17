@@ -40,7 +40,12 @@ export class RegisterComponent implements OnInit {
     }else{
           this._activarQr = false 
     }
+<<<<<<< HEAD
      
+=======
+      
+    
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
     this.registroForm = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       apellido: ['', [Validators.required, Validators.minLength(2)]],
@@ -57,11 +62,18 @@ export class RegisterComponent implements OnInit {
     });
   }
   submitForm = () => {
+<<<<<<< HEAD
     debugger;
     /* if(this.codigo  != ''){
         this.nvTrl.warning('Ups!, Falta el código qr, no te olvides de escanear' )
         return;
      }*/
+=======
+     if(this.codigo  != ''){
+        this.nvTrl.warning('Ups!, Falta el código qr, no te olvides de escanear' )
+        return;
+     }
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
           
      if(!this.soyCliente){ //"No es == a si es cliente por eso no debe validar el formulario "
             if (this.registroForm.valid) {
@@ -72,6 +84,10 @@ export class RegisterComponent implements OnInit {
               this.usuario.genero = 'X';
               this.usuario.telcel = this.registroForm.value['telcel'];
               this.usuario.telref = this.registroForm.value['telcel'];
+<<<<<<< HEAD
+=======
+          //    this.usuario.telref = this.registroForm.value['telref'];
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
               this.email.asunto = '¡Genial!, Ya casi sos parte de freetags';
               this.email.correo = this.usuario.email;
               this.email.nombre = this.usuario.nombre;

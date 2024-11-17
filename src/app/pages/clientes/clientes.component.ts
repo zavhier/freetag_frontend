@@ -64,6 +64,10 @@ export class ClientesComponent implements OnInit {
   
   submitForm = () => {    
     if (this.rzForm.valid) {
+<<<<<<< HEAD
+=======
+     
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
         this._usuario.idempresa = environment.company;
         this._usuario.email =  this.rzForm.value['email'];
         this._usuario.nombre = this.rzForm.value['nombre'];

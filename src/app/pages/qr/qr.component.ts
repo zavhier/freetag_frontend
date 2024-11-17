@@ -29,6 +29,10 @@ export class QrComponent implements OnInit {
   }
 
    getProductoByRazonSocial(){
+<<<<<<< HEAD
+=======
+    debugger;
+>>>>>>> cf52c59c75706686b86fc91b4d7a9694817d6d27
     this.productoService.getProductByRazonSocial(this.razon_social, this.access_token).subscribe(resp=>{
           this.productos  = resp.data;
     })
