@@ -16,7 +16,7 @@ export class GmapsServiceService {
     }
     return new Promise((resolve, reject) => {
       const script = document.createElement('script');
-      script.src ='https://maps.googleapis.com/maps/api/js?key=AIzaSyCuVwgjIa6k3Ju16xCawZkLpA1-EpXZuMY&callback=Function.prototype' 
+      script.src ='https://maps.googleapis.com/maps/api/js?key=' 
       script.async = true;
       script.defer = true;
       document.body.appendChild(script);
